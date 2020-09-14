@@ -7,7 +7,8 @@ def edit_existing_file(filename)
 
   puts "Enter any text to write to the file:"
   user_input = gets.chomp
-  new_file.syswrite(user_input)
+  new_file.syswrite("#{user_input}\n")
+  new_file.syswrite("Recording time: #{Time.now}")
   new_file.close
 end
 
