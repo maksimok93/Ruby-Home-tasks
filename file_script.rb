@@ -2,7 +2,6 @@ def create_text_file(filename)
   File.new("#{filename}.txt", "w")
 end
 
-
 def edit_existing_file(filename)
   new_file = File.open("#{filename}.txt", "w")
 
@@ -12,13 +11,11 @@ def edit_existing_file(filename)
   new_file.close
 end
 
-
 def display_file_content(filename)
   content = IO.readlines("#{filename}.txt")
   puts "Please, see file content below:"
   puts content
 end
-
 
 def delete_file(filename)
   File.delete("#{filename}.txt")
@@ -26,7 +23,6 @@ def delete_file(filename)
     puts "File has been successfully deleted."
   end
 end
-
 
 if __FILE__ == $0
   puts "Please, enter a filename you want to create: "
