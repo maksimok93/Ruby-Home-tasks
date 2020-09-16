@@ -18,18 +18,18 @@ def display_file_content(filename)
   puts content
 end
 
-def delete_file(filename)
-  File.delete("#{filename}.txt")
-  if File.file?(filename) == false
-    puts "File has been successfully deleted."
-  end
+def file_exists?(filename)
+  File.file?(filename)
 end
 
-if __FILE__ == $0
-  puts "Please, enter a filename you want to create: "
-  filename = gets.chomp
-  create_text_file(filename)
-  edit_existing_file(filename)
-  display_file_content(filename)
-  delete_file(filename)
+def delete_file(filename)
+  File.delete("#{filename}.txt")
+  puts file_exists?(filename) ? "File is still enable!" : "File has been successfully deleted."
 end
+
+puts "Please, enter a filename you want to create: "
+filename = gets.chomp
+create_text_file(filename)
+edit_existing_file(filename)
+display_file_content(filename)
+delete_file(filename)
