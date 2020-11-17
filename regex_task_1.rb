@@ -4,7 +4,7 @@
 
 def valid_email?(email)
   # We use !! to convert the return value to a boolean
-  !!email.match(/\A[\w.+-]+@\w+\.\w+\z/)
+  !!email.match(/\A[\w.+-]+@\w+\.[a-z]+\z/)
 end
 
 def excludes_matches?(email)
@@ -12,8 +12,8 @@ def excludes_matches?(email)
   matches.length == 0 ? true : false
 end
 
-while true
-  p "Type an e-mail for checking: "
+loop do
+  p 'Type an e-mail for checking: '
   email = gets.chomp
   if valid_email?(email.to_s) && excludes_matches?(email.to_s)
     p 'Email has been approved.'
