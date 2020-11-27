@@ -3,9 +3,9 @@ require_relative 'constants'
 require 'mime'
 include MIME
 
-def send_message(recipient, subject: nil, body: nil)
+def send_email(recipient, subject: nil, body: nil)
   mail = Mail.new
-  mail.from    = UsersData::EMAIL
+  mail.from    = UsersData::SENDER
   mail.to      = recipient.to_s
   mail.subject = subject.to_s
   mail.body    = body.to_s
@@ -14,26 +14,26 @@ def send_message(recipient, subject: nil, body: nil)
   $service.send_user_message($user_id, message)
 end
 
-def get_last_message_id(from = nil)
+def get_email_ids(from = nil, text = nil)
   emails = $service.list_user_messages(
       $user_id,
-      max_results: 1,
-      q: "from: #{from.to_s}"
+      max_results: 10,
+      q: "from: #{from.to_s} #{text.to_s}"
   )
 
   mail = emails.messages.map { |mail| "#{mail.id}" }
   mail.join(', ')
 end
 
-def delete_message(id)
+def delete_email(id)
   $service.delete_user_message($user_id, id)
 end
 
-def get_last_message(from = nil)
+def get_email_by_date(from = nil, date = nil)
   emails = $service.list_user_messages(
       $user_id,
       max_results: 1,
-      q: "from: #{from.to_s}"
+      q: "from: #{from.to_s} after:#{date}"
   )
 
   email_array = []
